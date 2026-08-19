@@ -18,11 +18,6 @@
 %endmacro
 
 
-%macro easyAdd 2
-    
-%endmacro
-
-
 section .text
 
 global _start
@@ -44,22 +39,20 @@ _start:
 
 
 	mov     eax, [x]
-    sub     eax, '0'
     mov     ebx, [y]
-    sub     ebx, '0'
-    mul     ebx
-    add     eax, '0'
+    mul     eax
 	mov     [mult], eax
 
 	print 	mult, 1
 	print 	msg2, len2 ; space
 
-    ; xor cx,cx ; cx-register is the counter, set to 0
-    ; powLoop: ; Whatever you wanna do goes here, should not change cx
-    ;     inc cx ; Increment
-    ;     cmp cx,[y] ; Compare cx to the limit
+    xor cx,cx ; cx-register is the counter, set to 0
+    powLoop: ; Whatever you wanna do goes here, should not change cx
+        inc cx ; Increment
+        cmp cx,[y] ; Compare cx to the limit
+        print   msg, len
     
-    ;     jle powLoop ; Loop while less or equal
+        jle powLoop ; Loop while less or equal
 
 	print 	pow, 1
 	print 	msg3, len3 ; end bracket
