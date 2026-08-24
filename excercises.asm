@@ -20,6 +20,8 @@ global main
 main:
     mov ebp, esp; for correct debugging 
     ;WRITE YOUR CODE UNDER THIS LINE***********************************
+    
+    ; part 1
     mov eax, 5 ; 1
     
     mov ecx, 15 ; 2
@@ -46,6 +48,25 @@ main:
     
     add ebx, ecx ; 8
     dec ebx
+    
+    ; part 2
+    mov eax, 12 ; 1
+    add eax, 8
+    
+    mov edx, 40 ; 2
+    sub edx, 15
+    
+    mov edx, 10 ; 3
+    dec edx
+    dec edx
+    
+    mov ebx, 7 ; 4
+    mov ecx, ebx
+    inc ecx
+    
+    mov eax, 30 ; 5
+    mov ebx, 45
+    sub ebx, eax
     
     ;Exit the program
     ;Your program will stop running after this executes!
