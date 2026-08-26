@@ -1,6 +1,6 @@
  ;*************************************************************************
  ; Your Name: Melody Scott
- ; Project Due Date: 8/24/26 at end of class
+ ; Project Due Date: at end of class
  ; Project Name: Exercises
  ; CSCI-10 M2465: Computer Architecture and Organization
  ; Fall 2026
@@ -67,6 +67,24 @@ main:
     mov eax, 30 ; 5
     mov ebx, 45
     sub ebx, eax
+
+    ; part 3
+    xor ecx, ecx ; 1
+    
+    mov eax, 25 ; 2
+    mov ebx, 5
+    mov edx, eax
+    add edx, ebx
+    
+    mov eax, 100 ; 3
+    mov ebx, 20
+    mov ecx, 5
+    sub eax, ebx
+    sub eax, ecx
+    dec eax
+    
+    jumpLabel: ; 4
+        jmp jumpLabel
     
     ;Exit the program
     ;Your program will stop running after this executes!
