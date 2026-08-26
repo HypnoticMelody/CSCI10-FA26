@@ -9,11 +9,12 @@
 ;data section: contains initialized data, like variables and constants
 section .data
 msg db `Look ma, I'm in a 'macro'! Oh and uh "Hello NASM!" or something\n`
-msgLen equ $ - msg
+msgLen equ $-msg
 ;bss section: contains uninitialized data, declared but not assigned data yet (stands for Block Starting Symbol)
 section .bss
 printHoldA: resb 32
 printHoldB: resb 32
+printRet: resb 32
 ;text section: contains the code for the program
 section .text
 print: ; ecx = msg, edx = len, ebp = return label  |  Also, doesn't override eax or ebx
@@ -24,14 +25,14 @@ print: ; ecx = msg, edx = len, ebp = return label  |  Also, doesn't override eax
     int 0x80
     mov eax, [printHoldA] ; give eax back its old value
     mov ebx, [printHoldB] ; give ebx back its old value
-    jmp ebp
+    jmp [printRet]
 global main
 main:
     mov ebp, esp; for correct debugging 
     ;WRITE YOUR CODE UNDER THIS LINE***********************************
     mov ecx, msg
     mov edx, msgLen
-    mov ebp, ret1 ; says where to jump back
+    mov dword [printRet], ret1 ; says where to jump back
     jmp print ; call that 'macro'!
     ret1: ; the aforementioned place to jump back
     
