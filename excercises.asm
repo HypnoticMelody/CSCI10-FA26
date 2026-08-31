@@ -4,7 +4,7 @@
  ; Project Name: Exercises
  ; CSCI-10 M2465: Computer Architecture and Organization
  ; Fall 2026
- ; Project Description: testing our understanding of some basic opcodes
+ ; Project Description: stuff
  ;*************************************************************************
 
 ;data section: contains initialized data, like variables and constants
