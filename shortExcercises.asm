@@ -1,7 +1,7 @@
  ;*************************************************************************
  ; Your Name: Melody Scott
  ; Project Due Date: at end of class
- ; Project Name: Exercises
+ ; Project Name: Short Exercises
  ; CSCI-10 M2465: Computer Architecture and Organization
  ; Fall 2026
  ; Project Description: stuff
