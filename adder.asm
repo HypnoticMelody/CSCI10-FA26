@@ -13,7 +13,7 @@ section .data
 ;bss section: contains uninitialized data, declared but not assigned data yet (stands for Block Starting Symbol)
 section .bss
     input resb 1
-    total resb 32
+    total resb 1
     
     macroHoldA: resb 32
     macroHoldB: resb 32
@@ -48,7 +48,7 @@ main:
     jmp print
     ret1:
     
-    mov eax, 0
+    mov byte [total], 48
     
     cycle:
         mov ecx, input
@@ -58,28 +58,21 @@ main:
         ret2:
         
         sub byte [input], 48
-        
-        mov ecx, input
-        mov edx, 1
-        mov dword [macroRet], ret3
-        jmp print
-        ret3:
-        
         cmp byte [input], 0
         je end
         
-        mov ebx, eax
-        add eax, [input]
-        cmp eax, 9
+        mov eax, [input]
+        mov ebx, [total]
+        add byte [total], eax
+        cmp byte [total], 57
         jg overshot
         
     jmp cycle
     
     overshot:
-        mov eax, ebx
+        mov [total], ebx
     end:
-        add eax, 48
-        mov ecx, eax
+        mov ecx, total
         mov edx, 1
         mov dword [macroRet], ret4
         jmp print
