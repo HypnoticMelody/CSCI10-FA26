@@ -48,7 +48,7 @@ main:
     jmp print
     ret1:
     
-    mov byte [total], 48
+    mov byte [total], '0'
     
     cycle:
         mov ecx, input
@@ -57,14 +57,14 @@ main:
         jmp read
         ret2:
         
-        sub byte [input], 48
+        sub byte [input], '0'
         cmp byte [input], 0
         je end
         
         mov eax, [input]
         mov ebx, [total]
         add byte [total], eax
-        cmp byte [total], 57
+        cmp byte [total], '9'
         jg overshot
         
     jmp cycle
