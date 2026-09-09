@@ -33,7 +33,7 @@ read: ; ecx = place to put result in, edx = len, macroRet = where to return to |
     mov [macroHoldA], eax ; save the eax value
     mov [macroHoldB], ebx ; save the ebx value
     mov eax, 3 ; syscall = sys_read
-    mov ebx, 0 ; output = std_in
+    mov ebx, 0 ; input = std_in
     int 0x80
     mov eax, [macroHoldA] ; give eax back its old value
     mov ebx, [macroHoldB] ; give ebx back its old value
