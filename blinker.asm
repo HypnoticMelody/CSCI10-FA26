@@ -1,15 +1,18 @@
  ;*************************************************************************
- ; Your Name: 
- ; Project Due Date: 
- ; Project Name: 
+ ; Your Name: Melody Scott
+ ; Project Due Date: Oct 7
+ ; Project Name: Blinker
  ; CSCI-10 M2465: Computer Architecture and Organization
  ; Fall 2026
- ; Project Description:
+ ; Project Description: blinks left or right however many times and like, exits when it needs to / is told to or whatever
  ;*************************************************************************
 ;data section: contains initialized data, like variables and constants
 section .data
-    prompt db `Gimme yer inputs!\n`
-    promptLen equ $-prompt
+    prompt1 db `What direction?\n`
+    prompt1Len equ $-prompt1
+    prompt2 db `How many?\n`
+    prompt2Len equ $-prompt2
+    
     dummy db `You didn't use a viable character, ya dummy!\n`
     dummyLen equ $-dummy
     
@@ -24,17 +27,29 @@ section .bss
 section .text
 global main
 L:
-    
+    mov ecx, left
     jmp DIR
 R:
-    
-    jmp DIR
+    mov ecx, right
 DIR:
+    mov eax, 4
+    mov ebx, 1
+    mov edx, blinkLen
+    int 0x80
+    dec byte [count]
+    cmp byte [count], 0
+    jne DIR
     jmp cycle
 main:
     mov ebp, esp; for correct debugging 
     ;WRITE YOUR CODE UNDER THIS LINE***********************************
     cycle:
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, prompt1
+        mov edx, prompt1Len
+        int 0x80
+        
         mov eax, 3
         mov ebx, 0
         mov ecx, input
@@ -43,6 +58,12 @@ main:
         
         cmp byte [input], `Q`
         je Q
+        
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, prompt2
+        mov edx, prompt2Len
+        int 0x80
         
         mov eax, 3
         mov ebx, 0
@@ -56,10 +77,14 @@ main:
         cmp byte [input], `R`
         je R
         
-        jmp ohNoYoureADummy
+        jmp yaDummy
     
-    ohNoYoureADummy:
-        
+    yaDummy:
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, dummy
+        mov edx, dummyLen
+        int 0x80
     Q:
     ;Exit the program
     ;Your program will stop running after this executes!
