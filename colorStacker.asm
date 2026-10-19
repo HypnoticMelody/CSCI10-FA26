@@ -1,4 +1,4 @@
-;*************************************************************************
+ ;*************************************************************************
  ; Your Name: Melody Scott
  ; Project Due Date: 10/21/2026
  ; Project Name: Color Stacker
@@ -12,8 +12,6 @@ start db `Enter color stack!\n`
 startLen equ $ - start
 end db `Done\n`
 endLen equ $ - end
-dummy db `Use stuff from [r,b,g,p,q], silly!\n`
-dummyLen equ $ - dummy
 
 r db `RED`
 rLen equ $ - r
@@ -88,7 +86,7 @@ main:
         cmp byte [input], "q"
         jz ejectStack
         
-        jmp wrongSymbol
+        jmp makeStack
         
         goodToGo:
         push byte [input]
@@ -107,12 +105,6 @@ main:
         jz green
         cmp ecx, "p"
         jz purple
-    wrongSymbol: ; used something other than r,b,g,p,q
-        mov eax, 4
-        mov ebx, 1
-        mov ecx, dummy
-        mov edx, dummyLen
-        int 0x80
     endEject:
         mov eax, 4
         mov ebx, 1
@@ -125,4 +117,3 @@ main:
     mov eax, 1 ;sys_exit system call number
     mov ebx, 0 ;sys_exit, return 0 status on exit - 'No Errors'
     int 80h ;interrupt to invoke a system call (and exit the program)
-
