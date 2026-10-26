@@ -1,17 +1,17 @@
  ;*************************************************************************
- ; Your Name: 
- ; Project Due Date: 
- ; Project Name: 
+ ; Your Name: Melody Scott
+ ; Project Due Date: October 28, 2026
+ ; Project Name: Encryption
  ; CSCI-10 M2465: Computer Architecture and Organization
  ; Fall 2026
- ; Project Description:
+ ; Project Description: Applies a caesar cipher that you define to a string that you give it
  ;*************************************************************************
 ;data section: contains initialized data, like variables and constants
 section .data
-
+    bufferLen equ 100
 ;bss section: contains uninitialized data, declared but not assigned data yet (stands for Block Starting Symbol)
 section .bss
-input resb 1
+    buffer resb bufferLen
 
 ;text section: contains the code for the program
 section .text
@@ -21,30 +21,33 @@ main:
     ;WRITE YOUR CODE UNDER THIS LINE***********************************
     mov eax, 3
     mov ebx, 0
-    mov ecx, input ; shift num
-    mov edx, 1
+    mov ecx, buffer
+    mov edx, bufferLen
     int 0x80
     
-    sub byte [input], `0`
-    push input
-    push 0x1F ; end of string
+    sub byte [buffer], `0`
     
-    mov esi, 0 ; counter
-    read:
-        inc esi
+    mov esi, buffer
+    inc esi
+    mov edi, buffer
+    add edi, eax
+    
+    
+    print:
+        cmp esi, edi
+        je end
         
-        mov eax, 3
-        mov ebx, 0
-        mov ecx, input ; character
+        mov eax, [buffer]
+        add byte [esi], eax
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, esi
         mov edx, 1
         int 0x80
         
-        push input
-        jmp read
-    
-    print:
-        pop eax
-        cmp eax, 
+        inc esi
+        jmp print
+    end:
     
     
     ;Exit the program
